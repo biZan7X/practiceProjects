@@ -1,0 +1,50 @@
+body {
+	background-color: #5a20cb;
+}
+
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.input-form {
+	display: flex;
+	width: 75%;
+}
+
+.input-form input {
+	border-radius: 2rem;
+	width: 90%;
+	height: 2rem;
+	margin: 0rem 1rem;
+	padding: 0rem 1rem;
+}
+
+.input-form button {
+	border-radius: 3rem;
+	width: 5%;
+	height: 2.5rem;
+	background-color: #23c4ed;
+	cursor: pointer;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+ul {
+	text-decoration: none;
+	list-style: none;
+	margin: 2rem;
+}
+
+li {
+	margin: 1rem;
+	border-color: 2rem 2rem black;
+	border-width: 5rem;
+	font-size: xx-large;
+	font-weight: bolder;
+}
