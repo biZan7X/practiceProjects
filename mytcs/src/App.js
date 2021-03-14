@@ -1,76 +1,32 @@
 import React from "react";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import GetList from "./GetList";
+import Home from "./Home";
+import PostForm from "./PostForm";
 
-class App extends React.Component {
-	constructor(props) {
-		super(props);
+const App = () => {
+	return (
+		<div>
+			<h1>This is single page application.</h1>
+			<BrowserRouter>
+				<ul>
+					<li>
+						<Link to="/">Home</Link>
+					</li>
+					<li>
+						<Link to="/getlist">Get List</Link>
+					</li>
+					<li>
+						<Link to="/postform">Post Form</Link>
+					</li>
+				</ul>
 
-		this.state = { username: null, age: null, tech: "java" };
-	}
-
-	onChangeHandler = (e) => {
-		const name = e.target.name;
-		const value = e.target.value;
-
-		this.setState({ [name]: value });
-	};
-
-	//* instead of the onSubmit handler we could have used onClickHandler as well
-	onSubmitHandler = (e) => {
-		e.preventDefault();
-
-		if (this.state.username === null || this.state.username === "")
-			alert("please enter the username");
-		else if (this.state.age === null || this.state.age === "")
-			alert("please enter the age");
-		else if (isNaN(this.state.age)) alert("please enter a valid age");
-		else alert(this.state.username + this.state.age + this.state.tech);
-	};
-
-	render() {
-		return (
-			<div>
-				<form onSubmit={this.onSubmitHandler} style={{ margin: "1rem" }}>
-					<div style={{ margin: "1rem" }}>
-						<label htmlFor="username">username : </label>
-						<br />
-						<input
-							value={this.state.username}
-							onChange={(e) => this.onChangeHandler(e)}
-							type="text"
-							name="username"
-						/>
-					</div>
-
-					<div style={{ margin: "1rem" }}>
-						<label htmlFor="age">age : </label>
-						<br />
-						<input
-							value={this.state.age}
-							onChange={(e) => this.onChangeHandler(e)}
-							type="text"
-							name="age"
-						/>
-					</div>
-
-					<div style={{ margin: "1rem" }}>
-						<label htmlFor="tech">technology : </label>
-						<br />
-						<select
-							onChange={(e) => this.onChangeHandler(e)}
-							value={this.state.tech}
-							name="tech"
-						>
-							<option value="java">java</option>
-							<option value="python">python</option>
-							<option value="c++">c++</option>
-						</select>
-					</div>
-
-					<button style={{ margin: "1rem" }}>Submit</button>
-				</form>
-			</div>
-		);
-	}
-}
+				<Route path="/" exact component={Home} />
+				<Route path="/getlist" component={GetList} />
+				<Route path="/postform" component={PostForm} />
+			</BrowserRouter>
+		</div>
+	);
+};
 
 export default App;
