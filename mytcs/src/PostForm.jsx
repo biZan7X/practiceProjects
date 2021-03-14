@@ -1,10 +1,11 @@
+import axios from "axios";
 import React from "react";
 
 class PostForm extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { username: null, age: null, tech: "java" };
+		this.state = { userId: "", title: "", body: "", tech: "java" };
 	}
 
 	onChangeHandler = (e) => {
@@ -14,16 +15,28 @@ class PostForm extends React.Component {
 		this.setState({ [name]: value });
 	};
 
-	//* instead of the onSubmit handler we could have used onClickHandler as well
+	//* instead of the onSubmit handler we could have even used onClickHandler as well
 	onSubmitHandler = (e) => {
 		e.preventDefault();
 
-		if (this.state.username === null || this.state.username === "")
-			alert("please enter the username");
-		else if (this.state.age === null || this.state.age === "")
-			alert("please enter the age");
-		else if (isNaN(this.state.age)) alert("please enter a valid age");
-		else alert(this.state.username + this.state.age + this.state.tech);
+		if (this.state.userId === null || this.state.userId === "")
+			alert("please enter the userId");
+		else if (this.state.title === null || this.state.title === "")
+			alert("please enter the title");
+		else if (this.state.body === null || this.state.body === "")
+			alert("please enter the body");
+		else {
+			console.log(this.state.userId + this.state.title + this.state.body);
+
+			axios
+				.post("http://jsonplaceholder.typicode.com/posts", {
+					userId: this.state.userId,
+					title: this.state.title,
+					body: this.state.body,
+				})
+				.then((res) => console.log(res))
+				.catch((err) => console.log(err));
+		}
 	};
 
 	render() {
@@ -31,24 +44,35 @@ class PostForm extends React.Component {
 			<div>
 				<form onSubmit={this.onSubmitHandler} style={{ margin: "1rem" }}>
 					<div style={{ margin: "1rem" }}>
-						<label htmlFor="username">username : </label>
+						<label htmlFor="userId">userId : </label>
 						<br />
 						<input
-							value={this.state.username}
+							value={this.state.userId}
 							onChange={(e) => this.onChangeHandler(e)}
 							type="text"
-							name="username"
+							name="userId"
 						/>
 					</div>
 
 					<div style={{ margin: "1rem" }}>
-						<label htmlFor="age">age : </label>
+						<label htmlFor="title">title : </label>
 						<br />
 						<input
-							value={this.state.age}
+							value={this.state.title}
 							onChange={(e) => this.onChangeHandler(e)}
 							type="text"
-							name="age"
+							name="title"
+						/>
+					</div>
+
+					<div style={{ margin: "1rem" }}>
+						<label htmlFor="body">body : </label>
+						<br />
+						<input
+							value={this.state.body}
+							onChange={(e) => this.onChangeHandler(e)}
+							type="text"
+							name="body"
 						/>
 					</div>
 
